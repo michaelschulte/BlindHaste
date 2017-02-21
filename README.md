@@ -17,4 +17,4 @@ De Bellis, E., Schulte-Mecklenbeck, M., Brucks, W., Herrmann, A., & Hertwig, R. 
 Acknowledgments
 ---------------
 
-We thank the traffic division of the City of Zurich for providing the speed measurements; Kevin Brooks, Timothy Pleskac, and Paolo Pretto for comments on an earlier version of the manuscript; and the magnificent Susannah Goss for editing the manuscript. 
+We thank the traffic division of the City of Zurich for providing the speed measurements; Kevin Brooks, Timothy Pleskac, and Paolo Pretto for comments on an earlier version of the manuscript. 

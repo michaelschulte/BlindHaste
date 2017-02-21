@@ -12,9 +12,6 @@ setwd("BlindHaste/R") #Michael
 library(dplyr)
 library(tidyr)
 
-# disable scientific notation (otherwise transformation of date into character and POSIX doesn't work?!)
-  #options(scipen=999)
-  
 # load data
    raw.long3050 <- readRDS('../data/rawlong3050_check.RDS') # same as raw.wide but with one row per speed bracket (233008 rows)  
 # holidays 2008-2009  ----
@@ -124,28 +121,28 @@ library(tidyr)
 # remove VisZurich as it is merged into raw.long
   rm(VisZurich) 
   
-### varia (2007-2012) -------- 
+### brightness, clouds, dog (2007-2012) -------- 
   
   # load data
-  VariaZurich <- read.csv("../data/meteoswiss/varia2.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
+  BrightZurich <- read.csv("../data/meteoswiss/brightness.csv", header=TRUE, sep=";", stringsAsFactors = FALSE)
   # convert into POSIX format and account for time zone difference
-  VariaZurich$date_time <- as.POSIXct(as.character(VariaZurich$time), "%Y%m%d%H%M", tz="UTC")
-  attributes(VariaZurich$date_time)$tzone <- "Europe/Zurich"
+  BrightZurich$date_time <- as.POSIXct(as.character(BrightZurich$time), "%Y%m%d%H%M", tz="UTC")
+  attributes(BrightZurich$date_time)$tzone <- "Europe/Zurich"
   # remove rows with NA (data are on 10 minute resolution but measured only every houer)
-  VariaZurich <- VariaZurich[!is.na(VariaZurich$visibility_synop),]
+  BrightZurich <- BrightZurich[!is.na(BrightZurich$visibility_synop),]
   # delete unnecessary columns
-  VariaZurich <- subset(VariaZurich, select=-c(time))
+  BrightZurich <- subset(BrightZurich, select=-c(time))
   # change name of brightness to distinguish from other brightness measures
-  names(VariaZurich)[names(VariaZurich)=="brightness_lx_sma"] <- "brightness_lx_sma_10min"
+  names(BrightZurich)[names(BrightZurich)=="brightness_lx_sma"] <- "brightness_lx_sma_10min"
   # merge the two data frames
-  raw.long3050 <- merge(raw.long3050, VariaZurich, by.x=c("date_time"), by.y=c("date_time"), all.x=TRUE)
+  raw.long3050 <- merge(raw.long3050, BrightZurich, by.x=c("date_time"), by.y=c("date_time"), all.x=TRUE)
   # convert to num
   raw.long3050$brightness_lx_sma_10min <- as.numeric(as.character(raw.long3050$brightness_lx_sma_10min))
   raw.long3050$visibility_synop <- as.numeric(as.character(raw.long3050$visibility_synop))
   raw.long3050$fog <- as.numeric(as.character(raw.long3050$fog))
   raw.long3050$clouds <- as.numeric(as.character(raw.long3050$clouds))
-  # remove VariaZurich as it is merged into raw.long
-  rm(VariaZurich) 
+  # remove BrightZurich as it is merged into raw.long
+  rm(BrightZurich) 
   
 ### sunrise-sunset (2007-2009)  --------
 # resolution = 1 hour (actually 1 minute)
