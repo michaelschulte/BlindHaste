@@ -10,7 +10,7 @@ This repository contains data and code collected by the Traffic division of the 
 Citation
 --------
 
-The connected paper is under review at PlosOne and can be cited as follows: 
+The connected paper is under review at Plos One and can be cited as follows: 
 
 De Bellis, E., Schulte-Mecklenbeck, M., Brucks, W., Herrmann, A., & Hertwig, R. (revise and resubmit). Blind haste: When light goes down, speeding goes up. Plos One.
 
